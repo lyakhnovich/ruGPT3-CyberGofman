@@ -23,7 +23,7 @@ def deEmojify(text):
 print(deEmojify(text))
 
 
-txt_file = 'data\girik_txt\Jirinovskiyi_V._Antikissindjer.txt'
+txt_file = 'data\gofman_txt\Jirinovskiyi_V._Antikissindjer.txt'
 def convert_1stver(txt_file, n, m):
     """ Берем тестовый файл и составляем на его основе формат all_essays.jsonl
     {"text": "Тема: Комедия или драма? (по пьесе А.С. Грибоедова «Горе от ума»)\nСочинение: Грибоедов рассматривал театр
@@ -31,10 +31,10 @@ def convert_1stver(txt_file, n, m):
     2) Вариант 2, если 1й плохой: сделать сплит по "Владимир Вольфович Жириновский" в каждом файле и брать "Тема: краткое содержание книги или начало вразы, а \nСочинение: полный текст книги.
     """
     results = []
-    all_files = os.listdir("data\girik_txt")
+    all_files = os.listdir("data\gofman_txt")
     print(all_files)
     for file_name in all_files:
-        file_name_path = "data/girik_txt" + "/" + file_name
+        file_name_path = "data/gofman_txt" + "/" + file_name
         with open(file_name_path, mode="r", encoding="windows-1251", errors = 'backslashreplace') as csvfile:  # windows-1251
             #print(csvfile.read())
             raw_text = csvfile.read().strip().lstrip().rstrip().replace('\n', ' ').replace('\r', '').replace("'","")
@@ -68,12 +68,12 @@ def convert_2ndver(path):
             #print(csvfile.read())
             raw_text = csvfile.read()
             # try:
-            #     split_text = 'Владимир Вольфович Жириновский'
+            #     split_text = 'Гофман Игорь Авраалович'
             #     question = raw_text.split(split_text)[0]
             #     answer = raw_text.split(split_text)[1]
             # except:
 
-            print('no Владимир Вольфович Жириновский')
+            print('no Гофман Игорь Авраалович')
             split_text = '\n\n'
             question = ' '.join(raw_text.splitlines()[0:7])
             print('question', question)
@@ -81,7 +81,7 @@ def convert_2ndver(path):
             print('answer', answer)
 
             #print(raw_text)
-            jsonl_string = {"text":"Скажи:{}\nВ. Жириновский:{}".format(question.strip().lstrip().rstrip().replace('\n', ' ').replace('\r', '').replace("'","").replace("--",""),answer.strip().lstrip().rstrip().replace('\n', ' ').replace('\r', '').replace("'","").replace("--",""))}
+            jsonl_string = {"text":"Скажи:{}\nВ. Гофман:{}".format(question.strip().lstrip().rstrip().replace('\n', ' ').replace('\r', '').replace("'","").replace("--",""),answer.strip().lstrip().rstrip().replace('\n', ' ').replace('\r', '').replace("'","").replace("--",""))}
             print(jsonl_string)
             results.append(jsonl_string)
 
@@ -93,4 +93,4 @@ def convert_2ndver(path):
             except:
                 print('encode error')
 
-convert_2ndver("data\girik_txt")
+convert_2ndver("data\gofman_txt")
